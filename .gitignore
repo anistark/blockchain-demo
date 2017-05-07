@@ -5,3 +5,5 @@ tools/runkeeper/
 docker-compose.override.yml
 .idea
 npm-debug.log
+.DS_Store
+

@@ -1,15 +1,15 @@
-FROM       node:alpine 
+FROM       node:alpine
 
 MAINTAINER https://github.com/anistark/blockchain-demo
 
-EXPOSE     3000
+EXPOSE     2005
 
-WORKDIR    /blockchain-demo 
+WORKDIR    /blockchain-demo
 
 COPY       package.json /blockchain-demo
 
 RUN        npm install
 
-COPY       . /blockchain-demo 
+COPY       . /blockchain-demo
 
 CMD        ["bin/www"]

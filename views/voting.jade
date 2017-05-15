@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  .container-fluid
+    h1 Voting System
+    - var peers = {1: 'A', 2: 'B', 3: 'C'}
+    - each peer, chain in peers
+      h3 Peer #{peer}
+      .row.row-horizon
+        - var blocks = []
+        - blocks.push({block: 1, chain: chain, nonce: 170464, txs: [{value: '12', from: 'D', to: 'PA'},{value: '23', from: 'E', to: 'PA'},{value: '19', from: 'W', to: 'PB'},{value: '24', from: 'L', to: 'PA'},{value: '21', from: 'C', to: 'PB'}], previous: '0000000000000000000000000000000000000000000000000000000000000000'})
+        - blocks.push({block: 2, chain: chain, nonce: 6045, txs: [{value: '9', from: 'R', to: 'PB'},{value: '48', from: 'K', to: 'PA'},{value: '6', from: 'P', to: 'PA'},{value: '10', from: 'H', to: 'PB'},{value: '8', from: 'B', to: 'PB'},{value: '5', from: 'T', to: 'PA'},{value: '22', from: 'V', to: 'PA'}], previous: '0000f15ef77ec85616f381a937acce80c15cc87022286cd4b593b530aae3dae3'})
+        - blocks.push({block: 3, chain: chain, nonce: 34127, txs: [{value: '10', from: 'A', to: 'PA'},{value: '34', from: 'M', to: 'PA'},{value: '32', from: 'Z', to: 'PA'}], previous: '00004d25fff1e63b180e8d10cee873cef7d79d882a2384d860e6de4e08394d51'})
+        - blocks.push({block: 4, chain: chain, nonce: 5591, txs: [{value: '62', from: 'G', to: 'PA'},{value: '67', from: 'F', to: 'PB'},{value: '75', from: 'Y', to: 'PB'},{value: '7', from: 'X', to: 'PA'},{value: '191', from: 'U', to: 'PB'}], previous: '00005735e6458d518a9d49c26c20a3e4811f0d2ce35a0f250130057516ad249a'})
+        - blocks.push({block: 5, chain: chain, nonce: 79448, txs: [{value: '54', from: 'N', to: 'PB'},{value: '769', from: 'Q', to: 'PA'},{value: '17', from: 'S', to: 'PA'}], previous: '00006b4dd540e7209c3f288b41b856d33f5ec5cb4c9bf1c5e413e5c5ad0959a5'})
+        each block in blocks
+          .col-xs-7
+            include includes/votingblock.jade
+
+  script.
+    $(function() {
+      setup(1, 1);
+      setup(2, 1);
+      setup(3, 1);
+      setup(4, 1);
+      setup(5, 1);
+
+      setup(1, 2);
+      setup(2, 2);
+      setup(3, 2);
+      setup(4, 2);
+      setup(5, 2);
+
+      setup(1, 3);
+      setup(2, 3);
+      setup(3, 3);
+      setup(4, 3);
+      setup(5, 3);
+    });
+
+    function getText(block, chain) {
+      var s = $('#block'+block+'chain'+chain+'number').val() +
+              $('#block'+block+'chain'+chain+'nonce').val();
+      for (var x=0; $('#block'+block+'chain'+chain+'tx'+x+'value').length > 0; x++) {
+        s = s + $('#block'+block+'chain'+chain+'tx'+x+'value').val() +
+                $('#block'+block+'chain'+chain+'tx'+x+'from').val() +
+                $('#block'+block+'chain'+chain+'tx'+x+'to').val();
+      }
+      s = s + $('#block'+block+'chain'+chain+'previous').val();
+      return s;
+    }
+
+    function setup(block, chain) {
+      updateHash(block, chain);
+      $('#block'+block+'chain'+chain+'mineButton').click(function(e) {
+          e.preventDefault();
+          var l = Ladda.create(this);
+          l.start();
+          setTimeout(function() {
+              mine(block, chain, true);
+              l.stop();
+            }, 250); // give UI time to update
+        });
+    }

@@ -14,16 +14,18 @@
          input.form-control(id='block#{block.block}chain#{block.chain}nonce', type='text', value='#{block.nonce}', onkeyup='updateChain(#{block.block}, #{block.chain});')
 
     .form-group
-      label.col-sm-2.control-label Votes:
+      label.col-sm-2.control-label Land Records:
       .col-sm-10
         - each tx, x in block.txs
           .input-group
-            .input-group-addon ID
+            .input-group-addon Plot
             input.form-control(id='block#{block.block}chain#{block.chain}tx#{x}value', type='text', value='#{tx.value}', onkeyup='updateChain(#{block.block}, #{block.chain});')
             .input-group-addon From:
             input.form-control(id='block#{block.block}chain#{block.chain}tx#{x}from', type='text', value='#{tx.from}', onkeyup='updateChain(#{block.block}, #{block.chain});')
             .input-group-addon -&gt;
             input.form-control(id='block#{block.block}chain#{block.chain}tx#{x}to', type='text', value='#{tx.to}', onkeyup='updateChain(#{block.block}, #{block.chain});')
+            .input-group-addon Cost
+            input.form-control(id='block#{block.block}chain#{block.chain}tx#{x}cost', type='text', value='#{tx.cost}', onkeyup='updateChain(#{block.block}, #{block.chain});')
 
     #state.form-group
       label.col-sm-2.control-label(for='block#{block.block}chain#{block.chain}previous') Prev:

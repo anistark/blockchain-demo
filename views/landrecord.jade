@@ -8,13 +8,11 @@ block content
       h3 Peer #{peer}
       .row.row-horizon
         - var blocks = []
-        - blocks.push({block: 1, chain: chain, nonce: 170464, txs: [{value: '12', from: 'D', to: 'PA'},{value: '23', from: 'E', to: 'PA'},{value: '19', from: 'W', to: 'PB'},{value: '24', from: 'L', to: 'PA'},{value: '21', from: 'C', to: 'PB'}], previous: '0000000000000000000000000000000000000000000000000000000000000000'})
-        - blocks.push({block: 2, chain: chain, nonce: 6045, txs: [{value: '9', from: 'R', to: 'PB'},{value: '48', from: 'K', to: 'PA'},{value: '6', from: 'P', to: 'PA'},{value: '10', from: 'H', to: 'PB'},{value: '8', from: 'B', to: 'PB'},{value: '5', from: 'T', to: 'PA'},{value: '22', from: 'V', to: 'PA'}], previous: '0000f15ef77ec85616f381a937acce80c15cc87022286cd4b593b530aae3dae3'})
-        - blocks.push({block: 3, chain: chain, nonce: 34127, txs: [{value: '10', from: 'A', to: 'PA'},{value: '34', from: 'M', to: 'PA'},{value: '32', from: 'Z', to: 'PA'}], previous: '00004d25fff1e63b180e8d10cee873cef7d79d882a2384d860e6de4e08394d51'})
-        - blocks.push({block: 4, chain: chain, nonce: 5591, txs: [{value: '62', from: 'G', to: 'PA'},{value: '67', from: 'F', to: 'PB'},{value: '75', from: 'Y', to: 'PB'},{value: '7', from: 'X', to: 'PA'},{value: '191', from: 'U', to: 'PB'}], previous: '00005735e6458d518a9d49c26c20a3e4811f0d2ce35a0f250130057516ad249a'})
-        - blocks.push({block: 5, chain: chain, nonce: 79448, txs: [{value: '54', from: 'N', to: 'PB'},{value: '769', from: 'Q', to: 'PA'},{value: '17', from: 'S', to: 'PA'}], previous: '00006b4dd540e7209c3f288b41b856d33f5ec5cb4c9bf1c5e413e5c5ad0959a5'})
+        - blocks.push({block: 1, chain: chain, nonce: 188404, txs: [{value: '12', from: 'Rajiv', to: 'Sachin', cost: '2345'},{value: '23', from: 'Akshay', to: 'Varun', cost: '1411'},{value: '19', from: 'Ruchi', to: 'Priya', cost: '744'},{value: '24', from: 'Rohit', to: 'Viren', cost: '63'},{value: '21', from: 'Aditya', to: 'Isha', cost: '963223'}], previous: '0000000000000000000000000000000000000000000000000000000000000000'})
+        - blocks.push({block: 2, chain: chain, nonce: 36619, txs: [{value: '9', from: 'Akshay', to: 'Anirudha', cost: '352352'},{value: '48', from: 'Karthika', to: 'Rizwan', cost: '63212'},{value: '6', from: 'Tina', to: 'Advaith', cost: '6332'},{value: '10', from: 'Meenakshi', to: 'Garima', cost: '43345'},{value: '8', from: 'Bindu', to: 'Talia', cost: '2342345'},{value: '5', from: 'Clark', to: 'Barry', cost: '251345'}], previous: '00001e8d6427739876cca5c38e954e7c25c74f46ff333b4aa4ddfe4cb3f629b7'})
+        - blocks.push({block: 3, chain: chain, nonce: 53113, txs: [{value: '10', from: 'Aditya', to: 'Purnia', cost: '2345'},{value: '34', from: 'Mark', to: 'Adam', cost: '752'},{value: '32', from: 'Lily', to: 'Joey', cost: '6294'}], previous: '000082d5336937c7d920f28f48aee2128e802612a13280492f28df4ce7d0bcf0'})
         each block in blocks
-          .col-xs-7
+          .col-xs-10
             include includes/landrecordblock.jade
 
   script.
@@ -22,20 +20,14 @@ block content
       setup(1, 1);
       setup(2, 1);
       setup(3, 1);
-      setup(4, 1);
-      setup(5, 1);
 
       setup(1, 2);
       setup(2, 2);
       setup(3, 2);
-      setup(4, 2);
-      setup(5, 2);
 
       setup(1, 3);
       setup(2, 3);
       setup(3, 3);
-      setup(4, 3);
-      setup(5, 3);
     });
 
     function getText(block, chain) {
@@ -44,7 +36,8 @@ block content
       for (var x=0; $('#block'+block+'chain'+chain+'tx'+x+'value').length > 0; x++) {
         s = s + $('#block'+block+'chain'+chain+'tx'+x+'value').val() +
                 $('#block'+block+'chain'+chain+'tx'+x+'from').val() +
-                $('#block'+block+'chain'+chain+'tx'+x+'to').val();
+                $('#block'+block+'chain'+chain+'tx'+x+'to').val() +
+                $('#block' + block + 'chain' + chain + 'tx' + x + 'cost').val();
       }
       s = s + $('#block'+block+'chain'+chain+'previous').val();
       return s;
